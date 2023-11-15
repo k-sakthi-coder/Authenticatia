@@ -10,7 +10,7 @@ const User = require('../model/schema');
 passport.use(new googleStrategy({
         clientID: "1055056926898-rdjd8h8e45caekien726bt10jheqmel3.apps.googleusercontent.com",
         clientSecret: "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",
-        callbackURL: "http://localhost:5000/user/auth/google/callback",
+        callbackURL: "http://adventurous-red-top-coat.cyclic.app/user/auth/google/callback",
     },
 
     async function(accessToken, refreshToken, profile, done){
