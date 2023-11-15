@@ -42,7 +42,7 @@ app.use(session({
         {
             mongooseConnection:db,
             autoRemove: 'disabled',
-            mongoUrl:"mongodb://127.0.0.1/NodeJS_Auth"
+            mongoUrl:"mongodb+srv://mechonsakthi44:klsalkthi333@cluster0.ulg7oer.mongodb.net/"
         },
         function(err){
             console.log(err ||  'connect-mongodb setup ok');
