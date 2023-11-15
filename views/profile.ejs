@@ -1,0 +1,128 @@
+<html>
+  <head>
+      <title><%= heading %></title>
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/noty/3.1.4/noty.min.css">
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/noty/3.1.4/noty.min.js"></script>
+      <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+      <link href="https://getbootstrap.com/docs/5.3/assets/css/docs.css" rel="stylesheet">
+      <style>
+          .gradient-custom {
+              background: #f6d365;
+              background: -webkit-linear-gradient(rgba(246, 211, 101, 1), rgba(253, 160, 133, 1));
+              background: linear-gradient(rgba(246, 211, 101, 1), rgba(253, 160, 133, 1))
+          }
+          .sign_out_btn, .delete-btn{
+            margin-top: 7px;
+            border-radius: 5px;
+            font-size:small;
+            background-color:whitesmoke;
+            font-family: calibri;
+            color: orange;
+            border: none;
+            transition: all .5s;
+          }
+          .delete-btn{
+            position:absolute;
+            background-color: lightcoral;
+            margin-right: 5px;
+            left: 90%;
+            color: white;
+          }
+          
+          .sign_out_btn:hover{
+            transform: scale(1.1);
+          }
+          .delete-btn:hover{
+            transform: scale(1.1);
+          }
+          .text-box{
+            border: 2px solid black;
+            border-radius: 10px;
+            padding-left: 5px;
+            background-color: whitesmoke;
+          }
+          .submit-btn{
+            background-color: blue;
+            opacity: 70%;
+            border-radius: 10px;
+            color: white;
+            border: 2px solid black;
+          }
+      </style>
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  </head>
+  <body>
+      <section class="vh-100" style="background-color: #f4f5f7;">
+          <div class="container py-5 h-100">
+            <div class="row d-flex justify-content-center align-items-center h-100">
+              <div class="col col-lg-6 mb-4 mb-lg-0">
+                <div class="card mb-3" style="border-radius: .5rem;">
+                  <div class="row g-0">
+                    <a href="/user/sign_out/<%=user.id%>" class="col-12 position-absolute" style="left: 10px;"><button class="sign_out_btn">Sign out</button></a>
+                    <div class="col-md-4 gradient-custom text-center text-white" style="border-top-left-radius: .5rem; border-bottom-left-radius: .5rem;">
+                      <h5 class="mt-5">Hello <%=user.userName%></h5>
+                      <img src="https://cdn-icons-png.flaticon.com/128/456/456212.png"alt="Avatar" class="img-fluid my-5" style="width: 60px;" />
+                      <a href="/user/reset_password/<%=user.id%>">
+                        <button type="button" class="btn"data-bs-toggle="modal" data-bs-target="#exampleModal">
+                          Reset password?
+                        </button>
+                      </a>
+                      <!-- FUTURE IMPLEMENTATION -->
+                      <!-- modal for update user name  -->
+                      <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                          <div class="modal-content">
+                            <div class="modal-header">
+                              <h4 class="modal-title" style="color:black; opacity:80%;"id="exampleModalLabel">Enter new user name</h4>
+                              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                              <form action="" method="POST">
+                                <input type="text" class="text-box" name="newName"placeholder="Enter user's name">
+                                <button type="submit" class="submit-btn" >Save changes</button>
+                              </form>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-8 ">
+                      <a href="/user/delete/<%= user.id %>"><button class="float-end delete-btn">Delete</button></a>
+                      <div class="card-body p-4">
+                        <h5>Information</h5>
+                        <hr class="mt-0 mb-4">
+                        <div class="row pt-1">
+                          <div class="col-12 mb-3">
+                            <h6>Email</h6>
+                            <p class="text-muted"><%= user.email%></p>
+                          </div>
+                          <div class="mb-3">
+                            <h6>Phone</h6>
+                            <p class="text-muted">123 456 789</p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+        <script type="">
+          <%if (flash.success && flash.success.length > 0 ){%>
+              new Noty({
+                theme:"relax",
+                text: '<%= flash.success %>',
+                type:"success",
+                layout:"topRight",
+                timeout:1500
+              }).show();
+          <%}%>
+        </script>
+        <script src="https://kit.fontawesome.com/91b25f8033.js" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+  </body>
+</html>

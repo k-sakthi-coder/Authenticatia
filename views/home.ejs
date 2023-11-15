@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset='utf-8'>
+        <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+        <title><%= heading %></title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/noty/3.1.4/noty.min.css">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/noty/3.1.4/noty.min.js"></script>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+        <link href="https://getbootstrap.com/docs/5.3/assets/css/docs.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <style>
+            body{
+                background-color: lightcyan;
+                margin: 0;
+            }
+            .heading{
+                text-align: center;
+                background:linear-gradient(white,orange,white) ;
+                border-bottom: 3px solid black;
+                margin: auto;
+            }
+            .buttons-div{
+                position: relative;
+                top:50px;
+                text-align: center;
+            }
+            button{
+                height: 3rem;
+                border-radius: 1rem;
+                background: radial-gradient(blue,aquamarine);
+                font-size: larger;
+                font-weight: bolder;
+            }
+            a{
+                margin-bottom: 50px;
+            }
+        </style>
+    </head>
+    <body class="container-fluid">
+        <div class="container-fluid row heading">
+            <h1 class="col">Authenticatia</h1>
+        </div>
+        <div class="row buttons-div">
+            <a href="/user/signUp"><button class="col-4">Sign Up</button></a>
+            <a href="/user/signIn"><button class="col-4">Sign In</button></a>
+        </div>
+        <script type="">
+            <%if (flash.success && flash.success.length > 0 ){%>
+                new Noty({
+                theme:"relax",
+                text: '<%= flash.success %>',
+                type:"success",
+                layout:"topRight",
+                timeout:1500
+                }).show();
+            <%}%>
+        </script>
+    </body>
+</html>
