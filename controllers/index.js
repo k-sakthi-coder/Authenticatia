@@ -85,7 +85,7 @@ module.exports.delete=async function(req,res){
     req.flash("success","User account deleted 🥺")
     // render home page
     return res.render("home",{
-        heading:"NodeJS Authendication"
+        heading:"Authendicatia"
     })
 }
 // controller for update new password
