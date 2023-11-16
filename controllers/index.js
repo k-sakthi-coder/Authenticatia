@@ -84,9 +84,7 @@ module.exports.delete=async function(req,res){
     res.clearCookie("NodoJS_Auth_Cookie");
     req.flash("success","User account deleted 🥺")
     // render home page
-    return res.render("home",{
-        heading:"Authendicatia"
-    })
+    return res.redirect("/");
 }
 // controller for update new password
 module.exports.updatePassword=async function(req,res){
