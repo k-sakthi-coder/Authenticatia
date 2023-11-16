@@ -3,7 +3,7 @@ const User=require("../model/schema")
 // Controller to render home
 module.exports.home=function(req,res){
     return res.render("home",{
-        heading:"Authendicatia"
+        heading:"Authenticatia"
     })
 }
 // controller for signup
