@@ -365,9 +365,9 @@
           <% if(posts){%>
             <% for(let post of posts){%>
               <div class="post">
-                <h5><%= post.user%></h5>
+                <h5 style="display: inline-block;"><%= post.user%></h5>
                 &nbsp; 
-                <p><%= post.postedAt%></p>
+                <p style="display: inline-block;"><%= post.postedAt%></p>
                 <% if(post.userId === user.id){%>
                   <div class="dropdown" style="display: inline-block; float:right;">
                     <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
