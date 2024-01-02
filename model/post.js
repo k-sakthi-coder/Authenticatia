@@ -2,7 +2,7 @@ const mongoose= require("mongoose");
 
 const multer=require("multer");
 const path=require("path");
-const POST=path.join("https://github.com/k-sakthi-coder/Authenticatia/tree/main/uploads/posts")
+const POST=path.join("/uploads/posts")
 
 const postSchema= new mongoose.Schema({
     content:{
