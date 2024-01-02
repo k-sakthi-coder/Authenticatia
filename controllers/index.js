@@ -205,11 +205,16 @@ module.exports.sharePost= async function(req,res){
 module.exports.addFriend= async function(req,res){
     console.log(req.query.user_id,req.query.user_name)
     const user = await User.findById(req.query.user_id)
-    user.friendList.push([req.query.user_name,req.query.friend_id])
-    await User.findByIdAndUpdate(req.query.user_id,{friendList:user.friendList})
-    console.log("friend added")
-    req.flash("success",`Added friend`)
-    return res.redirect("back")
+    const is_friendship_exist=user.friendList.findIndex((ele)=>ele[1]===req.query.friend_id)
+    if (is_friendship_exist===-1){
+        user.friendList.push([req.query.user_name,req.query.friend_id])
+        await User.findByIdAndUpdate(req.query.user_id,{friendList:user.friendList})
+        req.flash("success",`Added friend`)
+        return res.redirect("back")
+    }else{
+        req.flash("success",`Already in friend list`)
+        return res.redirect("back")
+    }
 }
 module.exports.deleteFriend= async function(req,res){
     const user = await User.findById(req.query.user_id)
