@@ -158,7 +158,7 @@ module.exports.deletePost=async function(req,res){
     "../uploads/posts/photo-1704008680388"
     const post=await Post.findById(req.params.postId);
     
-    fs.unlink("https://github.com/k-sakthi-coder/Authenticatia/tree/main/uploads/posts/"+post.filename,(err)=>{
+    fs.unlink("F:/EDUCATIONAL/CODING_NINJA/BACKEND SKILL TEST/NodeJS auth/uploads/posts/"+post.filename,(err)=>{
         if(err){
             console.log("File does not exist")
         }
