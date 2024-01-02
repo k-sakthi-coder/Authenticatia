@@ -2,7 +2,7 @@ const mongoose= require("mongoose");
 
 const multer=require("multer");
 const path=require("path");
-const POST=path.join("/uploads/posts")
+const POST=path.join("http://localhost:5000/uploads/posts")
 
 const postSchema= new mongoose.Schema({
     content:{
