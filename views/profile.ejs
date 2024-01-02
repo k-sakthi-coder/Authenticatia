@@ -6,7 +6,7 @@
       <script src="https://cdnjs.cloudflare.com/ajax/libs/noty/3.1.4/noty.min.js"></script>
       <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
       <link href="https://getbootstrap.com/docs/5.3/assets/css/docs.css" rel="stylesheet">
-      <style>
+      <style> 
         nav{
           height: 70px;
           width: 100%;
@@ -14,7 +14,6 @@
           display: flex;
           align-items: center;
           justify-content: space-between;
-
         }
         .heading{
             position: relative;
@@ -59,9 +58,17 @@
           height: 90vh;
           width: 100%;
         }
+        .profile-div{
+          height: 100%;
+          width: 25%;
+        }
         .posts-div{
+          height: 100%;
+          width: 50%;
+          background-color: white;
           overflow-x: auto;
           padding-right: 10px;
+          
         }
         .posts-div h2{
           margin-top: 10px;
@@ -77,6 +84,10 @@
           display: flex;
           align-content: center;
           
+        }
+        .create-post div{
+          display: flex;
+          align-content: center;
         }
         .add-post{
           height: 40px;
@@ -111,6 +122,14 @@
           width: 100%;
           height: auto;
         }
+        .input-caption{
+          display: inline-block;
+          height: 40px;
+        }
+        .input-file{
+          width: 250px;
+          display: inline-block;
+        }
         .user-actions{
           height: 40px;
           width: 100%;
@@ -133,6 +152,17 @@
         #comment-button{
           background-color:#fec446;
         }
+        .add-comment{
+          height: 30px !important;
+          border: 1px solid black !important;
+          margin-top: 10px;
+          background-color: aquamarine;
+          border-radius: 5px; 
+        }
+        .add-comment h6{
+          text-align: center;
+          margin-top: -3px;
+        }
         #share-button{
           background-color: #669900;
           border-radius: 0px 0px 5px 0px;
@@ -146,8 +176,26 @@
         #share-button:hover{
           background-color: lightgray;
         }
+        .friends-list{
+          height: 100%;
+          width: 25%;
+          background-color: whitesmoke;
+        }
+        .suggestion-and-your-friends-div{
+          display: flex; align-items: center;
+          height: fit-content;
+          width: 60%;
+          padding: 3px;
+          border-radius: 5px;
+          background-color: lightskyblue;
+          margin-bottom: 10px;
+        }
         body::-webkit-scrollbar{
           display: none;
+        }
+        h2{
+          text-align: center;
+          margin-top: 10px;
         }
         h6{
           margin-top: 0px;
@@ -199,6 +247,18 @@
           scale: 1.3;
           color: gray;
         }
+        .friends-suggestion{
+          margin-left: 20px;
+          width: 90%;
+          height: 40%;
+          overflow-x: auto;
+        }
+        .your-friends{
+          margin-left: 20px;
+          width: 90%;
+          height: 40%;
+          overflow-x: auto;
+        }
         * {
           scrollbar-width: auto;
           scrollbar-color: #8f54a0 #ffffff;
@@ -214,6 +274,16 @@
           background-color: #8f54a0;
           border-radius: 10px;
           border: 3px solid #ffffff;
+        }
+        @media screen and (max-width:700px){
+          body{
+            background-color: #FF4433;
+          }
+          .profile-div{
+            display: block;
+            width: 100%;
+        
+          }
         }
       </style>
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -232,26 +302,34 @@
         <ul class="dropdown-menu">
           <li>
             <a class="dropdown-item" href="/user/reset_password/<%=user.id%>">
-              <i class="fa-solid fa-key"></i> &nbsp; Reset password
+              <i class="fa-solid fa-key"></i> 
+                &nbsp; 
+                Reset password
             </a>
           </li>
           <li>
             <a class="dropdown-item" href="/user/delete/<%= user.id %>">
-                <i class="fa-solid fa-trash-can"></i> &nbsp; Delete account
+                <i class="fa-solid fa-trash-can"></i> 
+                  &nbsp; 
+                  Delete account
             </a>
           </li>
           <li>
             <a class="dropdown-item" href="/user/sign_out/<%=user.id%>">
-                <i class="fa-solid fa-right-from-bracket"></i> &nbsp; Log out
+                <i class="fa-solid fa-right-from-bracket"></i>
+                  &nbsp; 
+                  Log out
             </a>
           </li>
         </ul>
       </div>
     </nav>
     <div class="main">
-      <div class="col-md-4 gradient-custom text-center text-white" style="height: 100%; width: 25%;">
-        <h2 class="mt-5">Hello<br><%=user.userName%></h2>
-        <img src="https://cdn-icons-png.flaticon.com/128/456/456212.png"alt="Avatar" class="img-fluid my-5" style="width: 60px;" />
+      <div class="gradient-custom text-center text-white profile-div">
+        <h2 class="mt-5">Hello
+          <br><%=user.userName%>
+        </h2>
+        <img src="https://cdn-icons-png.flaticon.com/128/456/456212.png" alt="Avatar" class="img-fluid my-5" style="width: 60px;" />
         <div>
           <div>
             <h5>Information</h5>
@@ -269,15 +347,15 @@
           </div>
         </div>
       </div>
-      <div style="height: 100%; width: 50%; background-color: white;" class="posts-div">
+      <div class="posts-div">
         <h2>Posts</h2>
         <hr>
         <div class="create-post">
-          <div style="display: flex; align-content: center;">
+          <div>
             <img src="https://cdn-icons-png.flaticon.com/128/456/456212.png"alt="Avatar"style="height: 40px; width:40px;" />
             <form action="/user/post_image/?posted_user=<%=user.userName%>&posted_user_id=<%=user.id%>" method="POST" enctype="multipart/form-data">
-              <input type="text" class="input-group-text" name="content" style="display: inline-block; height: 40px;" placeholder="Type post caption...">
-              <input type="file" class="input-group-text" name="photo" style="width: 250px; display: inline-block;" placeholder="Select photo">
+              <input type="text" class="input-group-text input-caption" name="content" placeholder="Type post caption...">
+              <input type="file" class="input-group-text input-file" name="photo" placeholder="Select photo">
               <button type="submit" class="add-post">Add post</button>
             </form>
           </div>
@@ -287,79 +365,84 @@
           <% if(posts){%>
             <% for(let post of posts){%>
               <div class="post">
-                <h5 style="display: inline-block;"><%= post.user%></h5>
+                <h5><%= post.user%></h5>
                 &nbsp; 
-                <p style="display: inline-block;"><%= post.postedAt%></p>
+                <p><%= post.postedAt%></p>
                 <% if(post.userId === user.id){%>
-                <div class="dropdown" style="display: inline-block; float:right;">
-                  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                  </button>
-                  <ul class="dropdown-menu">
-                    <li>
-                      <a class="dropdown-item" href="/user/delete_post/<%= post.id%>"><i class="fas fa-trash mx-2"></i>
-                        Delete post
-                      </a>
-                    </li>
-                  </ul>
-                </div>
+                  <div class="dropdown" style="display: inline-block; float:right;">
+                    <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    </button>
+                    <ul class="dropdown-menu">
+                      <li>
+                        <a class="dropdown-item" href="/user/delete_post/<%= post.id%>">
+                          <i class="fas fa-trash mx-2"></i>
+                          Delete post
+                        </a>
+                      </li>
+                    </ul>
+                  </div>
                 <%}%>
                 <p><%=post.content%></p>
                 <%if(post.photo){%>
-                <img src="<%=post.photo%>" alt="<%= user.userName%>">
+                  <img src="<%=post.photo%>" alt="<%= user.userName%>">
                 <%}%>
                 <hr>
-              <div style="display: flex; justify-content: space-around;">
-                <div class="dropdown">
-                  <button class="btn dropdown-toggle" type="button" style="border: .5px solid gray;" data-bs-toggle="dropdown" aria-expanded="false">
-                    <i class="fa-solid fa-heart" style="color: #FF4433"></i> <%=post.likes.length %> Likes
-                  </button>
-                  <ul class="dropdown-menu">
-                    <h6 style="text-align: center;margin-top: 0px; margin-bottom: 0;">Liked users</h6>
-                    <hr>
-                    <%for(let user of post.likes){%>      
-                    <li style="margin-left: 10px;"> 
-                      <i class="fa-solid fa-circle-user"></i>&nbsp;<h6 style="display: inline-block;"><%=user[0]%></h6>
-                    </li>
-                    <hr>
-                    <%}%>
-                  </ul>
+                <div style="display: flex; justify-content: space-around;">
+                  <div class="dropdown">
+                    <button class="btn dropdown-toggle" type="button" style="border: .5px solid gray;" data-bs-toggle="dropdown" aria-expanded="false">
+                      <i class="fa-solid fa-heart" style="color: #FF4433"></i>
+                      <%=post.likes.length %> Likes
+                    </button>
+                    <ul class="dropdown-menu">
+                      <h6 style="text-align: center;margin-top: 0px; margin-bottom: 0;">Liked users</h6>
+                      <hr>
+                      <%for(let user of post.likes){%>      
+                        <li style="margin-left: 10px;"> 
+                          <i class="fa-solid fa-circle-user"></i>
+                          &nbsp;
+                          <h6 style="display: inline-block;"><%=user[0]%></h6>
+                        </li>
+                        <hr>
+                      <%}%>
+                    </ul>
+                  </div>
+                  <div class="dropdown">
+                    <button class="btn dropdown-toggle" type="button" style="border: .5px solid gray;" data-bs-toggle="dropdown" aria-expanded="false">
+                      <i class="fa-solid fa-comment" style="color: grey"></i> 
+                      <%=post.comments.length %> Comments
+                    </button>
+                    <ul class="dropdown-menu">
+                      <h6 style="text-align: center;">Comments</h6>
+                      <hr>
+                      <%for(let comment of post.comments){%>      
+                        <li style="margin-left: 10px;">
+                          <i class="fa-solid fa-circle-user"></i>
+                          <h6 style="display: inline-block;"><%=comment[0]%></h6>
+                          <p><%=comment[1]%></p>
+                        </li>
+                        <hr>
+                      <%}%>
+                    </ul>
+                  </div>
+                  <div class="dropdown">
+                    <button class="btn dropdown-toggle" type="button" style="border: .5px solid gray;" data-bs-toggle="dropdown" aria-expanded="false">
+                      <i class="fa-solid fa-comment" style="color: blue"></i> 
+                      <%=post.shares.length %> Shares
+                    </button>
+                    <ul class="dropdown-menu">
+                      <h6 style="text-align: center;">Shares</h6>
+                      <hr>
+                      <%for(let share of post.shares){%>      
+                        <li style="margin-left: 10px;">
+                          <i class="fa-regular fa-user"></i>
+                          &nbsp;
+                          <h6><%=share%></h6>
+                        </li>
+                        <hr>
+                      <%}%>
+                    </ul>
+                  </div>
                 </div>
-                <div class="dropdown">
-                  <button class="btn dropdown-toggle" type="button" style="border: .5px solid gray;" data-bs-toggle="dropdown" aria-expanded="false">
-                    <i class="fa-solid fa-comment" style="color: grey"></i> <%=post.comments.length %> Comments
-                  </button>
-                  <ul class="dropdown-menu">
-                    <h6 style="text-align: center;">Comments</h6>
-                    <hr>
-                    <%for(let comment of post.comments){%>      
-                    <li style="margin-left: 10px;">
-                      <i class="fa-solid fa-circle-user"></i>
-                      <h6 style="display: inline-block;"><%=comment[0]%></h6>
-                      <p><%=comment[1]%></p>
-                    </li>
-                    <hr>
-                    <%}%>
-                  </ul>
-                </div>
-                <div class="dropdown">
-                  <button class="btn dropdown-toggle" type="button" style="border: .5px solid gray;" data-bs-toggle="dropdown" aria-expanded="false">
-                    <i class="fa-solid fa-comment" style="color: blue"></i> <%=post.shares.length %> Shares
-                  </button>
-                  <ul class="dropdown-menu">
-                    <h6 style="text-align: center;margin-top: 0px; margin-bottom: 0;">Shares</h6>
-                    <hr>
-                    <%for(let share of post.shares){%>      
-                    <li style="margin-left: 10px;">
-                      <i class="fa-regular fa-user"></i>
-                      &nbsp;
-                      <h6 style="display: inline-block;"><%=share%></h6>
-                    </li>
-                    <hr>
-                    <%}%>
-                  </ul>
-                </div>
-                
-              </div>
                 <hr>
                 <div class="grid user-actions">
                     <button id="like-button" onclick="window.location.href='/user/add_like/?post_id=<%= post.id%>&user_id=<%=user.id%>&user_name=<%=user.userName%>'">
@@ -373,8 +456,8 @@
                       <li>
                         <form action="/user/add_comment/?commented_user=<%=user.userName%>&post_id=<%=post.id%>" method="POST">
                           <input type="text" name="comment" style="margin-top: 10px;" placeholder="Type comment...">
-                          <button style=" height: 30px; border: 1px solid black; margin-top: 10px; background-color: aquamarine; border-radius: 5px; ">
-                            <h6 style="text-align: center; margin-top: -3px;">Add comment</h6>
+                          <button type="submit" class="add-comment">
+                            <h6>Add comment</h6>
                           </button>
                         </form>
                       </li>
@@ -385,21 +468,21 @@
                     <h6>Share</h6></button>
                 </div>
               </div>
-              
             <%}%>
           <%}%>
         </div>
       </div>
-      
-      <div style="height: 100%; width: 25%; background-color: whitesmoke;">
-        <h2 style="text-align: center; margin-top: 10px;">Friend's list</h2>
+      <div class="friends-list">
+        <h2>Friend's list</h2>
         <hr>
-        <div style="margin-left: 20px; width: 90%; height: 40%; overflow-x: auto;">
-          <div style="position:sticky"><h4>Suggetion's</h4></div>
+        <div class="friends-suggestion">
+          <div>
+            <h4>Suggestion's</h4>
+          </div>
           &nbsp;
           <%for(let i of usersList){%>
             <%if(user.id !=i.id){%>
-                <div style="display: flex; align-items: center; height: fit-content; width: 60%; padding: 3px; border-radius: 5px; background-color: lightskyblue; margin-bottom: 10px;">
+                <div class="suggestion-and-your-friends-div">
                   <i class="fa-solid fa-circle-user"></i><p style="margin: auto; margin-left: 5px; margin-top: -2px;"><%=i.userName%></p>
                   <a href="/user/add_friend/?user_name=<%=i.userName%>&user_id=<%=user.id%>&friend_id=<%=i.id%>" >
                     <i class="fa-solid fa-user-plus" id="add-remove-friend-icon" style="float: right; color: #11141c;"></i>
@@ -409,15 +492,15 @@
           <%}%>
         </div>
         <hr>
-        <div style="margin-left: 20px; width: 90%; height: 40%; overflow-x: auto;">
+        <div class="your-friends">
           <h4>Your friend's</h4>
           &nbsp;
           <%for(let friend of user.friendList){%>
-            <div style="display: flex; align-items: center; height: fit-content; width: 60%; padding: 3px; border-radius: 5px; background-color: lightskyblue; margin-bottom: 10px;">
+            <div class="suggestion-and-your-friends-div">
               <i class="fa-solid fa-circle-user"></i><p style="margin: auto; margin-left: 5px;"><%=friend[0] %></p>&nbsp;
               <a href="/user/delete_friend/?user_id=<%=user.id%>&friend_id=<%=friend[1]%>">
-                <i class="fa-solid fa-user-minus" id="add-remove-friend-icon" style="float: right; color: #11141c;">
-              </i></a>
+                <i class="fa-solid fa-user-minus" id="add-remove-friend-icon" style="float: right; color: #11141c;"></i>
+              </a>
             </div> 
           <%}%>
         </div>
@@ -427,54 +510,83 @@
       <div class="info-divs">
           <div class="desc info-div">
               <h2>Authenticatia</h2>
-              <p>Authenticatia is a collective term for websites and applications that focus on communication, community-based input, interaction, content-sharing and collaboration. People use social media to stay in touch and interact with friends, family and various communities.</p>
+              <p>Authenticatia is a collective term for websites and applications that 
+                focus on communication, community-based input, interaction, content-sharing and collaboration. 
+                People use social media to stay in touch and interact with friends, family and various communities.
+              </p>
           </div>
           <div class="info-div"> 
               <h2>Address</h2>
-              <p>Oodaimedu,<br>
-              Mountain road,<br>
-              Oodaimedu 4 cross road,<br>
-              Anthiyur,<br>
-              Erode.<br>
-              PIN - 638 501</p>
+              <p>
+                Oodaimedu,
+                <br>
+                Mountain road,
+                <br>
+                Oodaimedu 4 cross road,
+                <br>
+                Anthiyur,
+                <br>
+                Erode.
+                <br>
+                PIN - 638 501
+              </p>
           </div>
           <div style="margin-left: 30px;" class="info-div">
               <h2>About Us</h2>
               <p>
-                  <b>Founder:</b> K Sakthivel<br>
-                  <b>CEO:</b> K Sakthivel<br>
-                  <b>UI Designer:</b> K Sakthivel<br>
-                  <b>Developer:</b> K Sakthivel<br>
-                  <b>Tester:</b> K Sakthivel<br>
+                  <b>Founder:</b> K Sakthivel
+                  <br>
+                  <b>CEO:</b> K Sakthivel
+                  <br>
+                  <b>UI Designer:</b> K Sakthivel
+                  <br>
+                  <b>Developer:</b> K Sakthivel
+                  <br>
+                  <b>Tester:</b> K Sakthivel
+                  <br>
               </p>
           </div>
-
       </div>
       <div style="text-align: center;" >
           <ul style="display: inline-flex;" class="follow-us">
-              <li><a href="https://www.facebook.com/KLSakthi.333" target="_blank"><i class="fa-brands fa-2x fa-facebook"></a></i></li>
-              <li><a href="https://www.instagram.com/haha_sakthi_ks333" target="_blank"><i class="fa-brands fa-2x fa-square-instagram"></i></a></li>
-              <li><a href="https://twitter.com/klsakthi333" target="_blank"><i class="fa-brands fa-2x fa-square-x-twitter twitter"></i></a></li>
-              <li><a href="https://github.com/sakthivel-programmer" target="_blank"><i class="fa-brands fa-2x fa-github"></i></a></li>
+              <li>
+                <a href="https://www.facebook.com/KLSakthi.333" target="_blank">
+                  <i class="fa-brands fa-2x fa-facebook"></i>
+                </a>
+              </li>
+              <li>
+                <a href="https://www.instagram.com/haha_sakthi_ks333" target="_blank">
+                  <i class="fa-brands fa-2x fa-square-instagram"></i>
+                </a></li>
+              <li>
+                <a href="https://twitter.com/klsakthi333" target="_blank">
+                  <i class="fa-brands fa-2x fa-square-x-twitter twitter"></i>
+                </a>
+              </li>
+              <li>
+                <a href="https://github.com/sakthivel-programmer" target="_blank">
+                  <i class="fa-brands fa-2x fa-github"></i>
+                </a>
+              </li>
           </ul>
           <br><br>
           <p class="copyright">Copyright @ Authenticatia 2023 All rights reserved</p>
       </div> 
-  </div>
-        <script type="">
-          <%if (flash.success && flash.success.length > 0 ){%>
-              new Noty({
-                theme:"relax",
-                text: '<%= flash.success %>',
-                type:"success",
-                layout:"topRight",
-                timeout:1500
-              }).show();
-          <%}%>
-        </script>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-        <script src="https://kit.fontawesome.com/91b25f8033.js" crossorigin="anonymous"></script>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+    </div>
+    <script type="">
+      <%if (flash.success && flash.success.length > 0 ){%>
+          new Noty({
+            theme:"relax",
+            text: '<%= flash.success %>',
+            type:"success",
+            layout:"topRight",
+            timeout:1500
+          }).show();
+      <%}%>
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <script src="https://kit.fontawesome.com/91b25f8033.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
   </body>
 </html>
